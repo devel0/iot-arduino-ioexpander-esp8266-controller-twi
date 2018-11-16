@@ -87,18 +87,32 @@ void clientOk(WiFiClient &client, int type)
   client.println();
 }
 
+#define FSTRBUFSZ 80
+
 // buffered writing of string
-void clientWriteBigString(WiFiClient& client, const char *str)
+void clientWriteBigString(WiFiClient &client, const __FlashStringHelper *str)
 {
-  char buf[81];
-  auto l = strlen(str);
-  for (int i = 0; i < l; i += 80)
+  auto p = (const char PROGMEM *)str;
+  char buf[FSTRBUFSZ + 1];
+
+  auto l = 0;
+  while (pgm_read_byte(p + (l++)))
+    ;
+
+  auto j = 0;
+  for (int i = 0; i < l; i += FSTRBUFSZ)
   {
-    auto s = 80;
-    if (i + 80 > l)
+    auto s = FSTRBUFSZ;
+    if (i + FSTRBUFSZ > l)
       s = l - i;
-    strncpy(buf, str + i, s);
-    buf[s] = 0;
+    auto k = 0;
+    while (s > 0)
+    {
+      buf[k++] = pgm_read_byte(p++);
+      --s;
+    }
+
+    buf[k] = 0;
     client.print(buf);
   }
 }
@@ -128,11 +142,9 @@ void manageWifi()
           {
             clientOk(client, CCTYPE_HTML);
 
-            const char *str =
+            clientWriteBigString(client,
 #include "index.htm.h"
-                ;
-
-            clientWriteBigString(client, str);
+            );
           }
 
           header = "";

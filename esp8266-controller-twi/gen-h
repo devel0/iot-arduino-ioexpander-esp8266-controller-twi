@@ -40,7 +40,7 @@ function removejscomment
 # - removing newlines
 dst="$exdir/index.htm.h"
 echo '/* GENERATED FILE BY gen-h UTIL - DO NOT EDIT THIS */' > "$dst"
-echo -n '("' >> "$dst"
+echo -n 'F("' >> "$dst"
 cat "$exdir/index.htm" | removetrailingnewlines | removeleadingspaces | removetrailingspaces | sed 's/\"/\\\"/g' | processnewline >> "$dst"
 echo '")' >> "$dst"
 
