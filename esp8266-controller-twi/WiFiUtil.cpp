@@ -179,6 +179,8 @@ void manageWifi()
           {
             clientOk(client, CCTYPE_PNG);
 
+            // client.write((uint8_t *)image, image_len); // doesn't work data truncated at 2.9k
+
             clientWriteBinary(client, image, image_len);
           }
 
