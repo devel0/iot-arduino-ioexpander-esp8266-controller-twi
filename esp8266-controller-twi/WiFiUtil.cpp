@@ -2,6 +2,8 @@
 #include "EEUtil.h"
 #include "SerialOS.h"
 
+#include "image.h"
+
 WiFiServer server(WEB_PORT);
 
 //
@@ -57,6 +59,7 @@ void reconnectWifi()
 #define CCTYPE_JSON 1
 #define CCTYPE_TEXT 2
 #define CCTYPE_JS 3
+#define CCTYPE_PNG 4
 
 void clientOk(WiFiClient &client, int type)
 {
@@ -77,6 +80,10 @@ void clientOk(WiFiClient &client, int type)
 
   case CCTYPE_JS:
     client.println("Content-Type: text/javascript");
+    break;
+
+  case CCTYPE_PNG:
+    client.println("Content-Type: image/png");
     break;
   }
 
@@ -99,7 +106,6 @@ void clientWriteBigString(WiFiClient &client, const __FlashStringHelper *str)
   while (pgm_read_byte(p + (l++)))
     ;
 
-  auto j = 0;
   for (int i = 0; i < l; i += FSTRBUFSZ)
   {
     auto s = FSTRBUFSZ;
@@ -114,6 +120,20 @@ void clientWriteBigString(WiFiClient &client, const __FlashStringHelper *str)
 
     buf[k] = 0;
     client.print(buf);
+  }
+}
+
+// buffered writing of binary
+void clientWriteBinary(WiFiClient &client, unsigned char arr[], unsigned int l)
+{  
+  auto j = 0;
+  for (int i = 0; i < l; i += FSTRBUFSZ)
+  {
+    auto s = FSTRBUFSZ;
+    if (i + FSTRBUFSZ > l)
+      s = l - i;
+    
+    client.write((const uint8_t *)(arr + i), s);
   }
 }
 
@@ -134,10 +154,11 @@ void manageWifi()
       {
         char c = client.read();
         header += c;
-        Serial.printf("header [%s]\n", header.c_str());
 
         if (c == '\n')
         {
+          Serial.printf("header [%s]\n", header.c_str());
+
           if (header.indexOf("GET / ") >= 0 || header.indexOf("GET /index.htm") >= 0)
           {
             clientOk(client, CCTYPE_HTML);
@@ -145,6 +166,20 @@ void manageWifi()
             clientWriteBigString(client,
 #include "index.htm.h"
             );
+          }
+          if (header.indexOf("GET /app.js ") >= 0)
+          {
+            clientOk(client, CCTYPE_JS);
+
+            clientWriteBigString(client,
+#include "app.js.h"
+            );
+          }
+          else if (header.indexOf("GET /image.png") >= 0)
+          {
+            clientOk(client, CCTYPE_PNG);
+
+            clientWriteBinary(client, image, image_len);
           }
 
           header = "";

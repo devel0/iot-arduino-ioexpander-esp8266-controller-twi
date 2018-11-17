@@ -13,62 +13,26 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-auto">
-                <h1>Temperature sensors</h1>
+                <h1>Arduino nano controller</h1>
             </div>
             <div class="col"><i class="fas fa-spin fa-spinner j-spin collapse"></i></div>
         </div>
         <div class="row">
-            <div class="col">
-                <h2>Chart</h2>
-                <canvas id="myChart" height="80"></canvas>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h2>Tabular</h2>
-                <div class="table-container">
-                    <div class="table table-striped">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><b>Address</b></th>
-                                    <th scope="col"><b>Description</b></th>
-                                    <th scope="col"><b>Value (C)</b></th>
-                                    <th scope="col"><b>Action</b></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody-temp"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-auto">
-                <button class="btn btn-primary" onclick='reloadall()'>reload all</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-default" onclick='reload_enabled=true;'>autoreload</button>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col">
-                <h3>Misc</h3>
-                <a href="https://github.com/devel0/iot-temp-sensors/tree/f0622a62268a06e570ea803fd9c3033b0ce1494c#api">API</a>
-                Info : <code id='info'></code>
+                <img src="image.png" width="639" height="302" border="0" usemap="#map" class='map' />
+                <map name="map">                
+                    <area shape="rect" coords="58,245,94,301" nohref="nohref" />
+                </map>
             </div>
         </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ="
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" integrity="sha256-oSgtFCCmHWRPQ/JmR4OoZ3Xke1Pw4v50uh6pLcu+fIc="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha256-1fEPhSsRKlFKGfK3eO710tEweHh1fwokU5wFGDHO+vg="
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js" integrity="sha256-nUK4JHJVwdj7H1SYkkMcuE2unpjH5vYOe3mGEVu/69Q="
         crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>

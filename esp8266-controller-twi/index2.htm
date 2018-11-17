@@ -1,0 +1,57 @@
+<html>
+
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js" integrity="sha256-nUK4JHJVwdj7H1SYkkMcuE2unpjH5vYOe3mGEVu/69Q="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>image map</h1>
+
+    <p>Example</p>
+
+    <img src="arduino-nano-pinout-layout-horizontal-thick.png" 
+    width="639" height="302" border="0" usemap="#map" class='map'/>
+
+<map name="map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Lorenzo Delana -->
+<area shape="rect" coords="58,245,94,301"   nohref="nohref" />
+</map>
+
+
+    <script>
+        $.fn.maphilight.defaults = {
+            fill: true,
+            fillColor: '000000',
+            fillOpacity: 0.2,
+            stroke: true,
+            strokeColor: '00D7FF',
+            strokeOpacity: 1,
+            strokeWidth: 1,
+            fade: true,
+            alwaysOn: false,
+            neverOn: false,
+            groupBy: false,
+            wrapClass: true,
+            shadow: false,
+            shadowX: 0,
+            shadowY: 0,
+            shadowRadius: 6,
+            shadowColor: '000000',
+            shadowOpacity: 0.8,
+            shadowPosition: 'outside',
+            shadowFrom: false
+        }
+        $('.map').maphilight();
+    </script>
+
+</body>
+
+</html>
