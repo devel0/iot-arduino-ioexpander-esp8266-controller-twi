@@ -2,6 +2,8 @@
 
 arduino nano as ioexpander controlled by esp8266 through TWI
 
+## browser page
+
 ![img](doc/home.png)
 
 ## requirements
@@ -12,3 +14,4 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 ## features
 
 - imagemap of arduino nano ports
+- index.htm, app.js, image.png served by esp8266 ( encoded into flash by [gen-h](esp8266-controller-twi/gen-h) )
