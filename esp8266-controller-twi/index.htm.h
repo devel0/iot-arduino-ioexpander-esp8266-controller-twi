@@ -18,11 +18,55 @@ crossorigin=\"anonymous\">\
 </div>\
 <div class=\"col\"><i class=\"fas fa-spin fa-spinner j-spin collapse\"></i></div>\
 </div>\
-<div class=\"row\">\
+\
+<div class=\"row mt-3\">\
 <div class=\"col-auto\">\
+1. Choose an action:\
+</div>\
+<div class=\"col-auto\">\
+<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\
+<label class=\"btn btn-secondary active\">\
+<input type=\"radio\" name=\"options\" id=\"option1\" autocomplete=\"off\" checked>ON\
+</label>\
+<label class=\"btn btn-secondary\">\
+<input type=\"radio\" name=\"options\" id=\"option2\" autocomplete=\"off\">OFF\
+</label>\
+</div>\
+</div>\
+</div>\
+\
+<div class=\"row mt-3\">\
+<div class=\"col-auto\">\
+2. Click on a port to set it\
+</div>\
+</div>\
+\
+<div class=\"row mt-3\">\
+<div class=\"col-auto\">\
+<!--                <img src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/arduino-nano-pinout-layout-horizontal-thick.png\"                    width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' /> -->\
 <img src=\"image.png\" width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' />\
+\
 <map name=\"map\">\
-<area shape=\"rect\" coords=\"58,245,94,301\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"168,232,200,301\" alt=\"A0\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"59,232,91,301\" alt=\"D13\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"240,232,272,301\" alt=\"A2\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"203,232,235,301\" alt=\"A1\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"276,232,308,301\" alt=\"A3\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"313,233,345,302\" alt=\"A4\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"350,233,382,302\" alt=\"A5\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"386,233,418,302\" alt=\"A6\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"422,233,454,302\" alt=\"A7\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"422,0,454,69\" alt=\"D02\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"385,0,417,69\" alt=\"D03\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"349,0,381,69\" alt=\"D04\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"313,0,345,69\" alt=\"D05\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"277,0,309,69\" alt=\"D06\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"240,0,272,69\" alt=\"D07\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"204,0,236,69\" alt=\"D08\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"168,0,200,69\" alt=\"D09\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"132,0,164,69\" alt=\"D10\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"95,0,127,69\" alt=\"D11\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"58,0,90,69\" alt=\"D12\" nohref=\"nohref\" />\
 </map>\
 </div>\
 </div>\
@@ -36,6 +80,7 @@ crossorigin=\"anonymous\"></script>\
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js\" integrity=\"sha256-nUK4JHJVwdj7H1SYkkMcuE2unpjH5vYOe3mGEVu/69Q=\"\
 crossorigin=\"anonymous\"></script>\
 <script src=\"app.js\"></script>\
+<!--    <script src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/app.js\"></script> -->\
 </body>\
 \
 </html>")

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# set to 1 to generate PROGMEM image flash version
+FLASH_VERSION=1
+
 # this script will invoked as prebuild ( see .vscode/arduino.json )
 
 echo "================================================"
@@ -58,7 +61,12 @@ echo '")' >> "$dst"
 # generate png byte array
 src="$exdir/arduino-nano-pinout-layout-horizontal-thick.png"
 dst="$exdir/image.h"
-echo -n "unsigned char image[] = {" > "$dst"
+if [ "$FLASH_VERSION" == "1" ]; then
+    flashopt="const PROGMEM"
+else
+    flashopt=""
+fi
+echo -n "$flashopt unsigned char image[] = {" > "$dst"
 cat "$src" | xxd -i >> "$dst"
 echo -n "};" >> "$dst"
 echo "unsigned int image_len = $(stat --printf="%s" "$src");" >> "$dst"

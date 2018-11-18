@@ -15,12 +15,12 @@ if (debug) baseurl = 'http://10.10.4.111';
 async function myfn() {
     $.fn.maphilight.defaults = {
         fill: true,
-        fillColor: '000000',
-        fillOpacity: 0.2,
+        fillColor: 'EFFF00',
+        fillOpacity: 0.0,
         stroke: true,
-        strokeColor: '00D7FF',
+        strokeColor: 'FFBB00',
         strokeOpacity: 1,
-        strokeWidth: 1,
+        strokeWidth: 2,
         fade: true,
         alwaysOn: false,
         neverOn: false,
@@ -35,7 +35,12 @@ async function myfn() {
         shadowPosition: 'outside',
         shadowFrom: false
     };
-    $('.map').maphilight();    
+    $('.map').maphilight();   
+    $('map').find('area').each(function(idx,val) {
+        $(val).mouseover(function() {
+           console.log(this.alt); 
+        });
+    });
 }
 
 myfn();

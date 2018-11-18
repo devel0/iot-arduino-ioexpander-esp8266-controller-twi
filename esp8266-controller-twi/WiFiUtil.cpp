@@ -125,15 +125,35 @@ void clientWriteBigString(WiFiClient &client, const __FlashStringHelper *str)
 
 // buffered writing of binary
 void clientWriteBinary(WiFiClient &client, unsigned char arr[], unsigned int l)
-{  
+{
   auto j = 0;
   for (int i = 0; i < l; i += FSTRBUFSZ)
   {
     auto s = FSTRBUFSZ;
     if (i + FSTRBUFSZ > l)
       s = l - i;
-    
+
     client.write((const uint8_t *)(arr + i), s);
+  }
+}
+
+void clientWriteBinaryF(WiFiClient &client, const unsigned char arr[], unsigned int l)
+{
+  const unsigned char *p = arr;
+  uint8_t buf[FSTRBUFSZ];
+
+  for (int i = 0; i < l; i += FSTRBUFSZ)
+  {
+    auto s = FSTRBUFSZ;
+    if (i + FSTRBUFSZ > l)
+      s = l - i;
+    auto k = 0;
+    for (int j = 0; j < s; ++j)
+    {
+      buf[k++] = pgm_read_byte(p++);
+    }
+
+    client.write((const uint8_t *)buf, s);
   }
 }
 
@@ -179,9 +199,11 @@ void manageWifi()
           {
             clientOk(client, CCTYPE_PNG);
 
-            // client.write((uint8_t *)image, image_len); // doesn't work data truncated at 2.9k
+            //client.write((uint8_t *)image, image_len); // doesn't work data truncated at 2.9k
 
-            clientWriteBinary(client, image, image_len);
+            //clientWriteBinary(client, image, image_len); // FLASH_VERSION=0 in gen-h
+
+            clientWriteBinaryF(client, image, image_len); // FLASH_VERSION=1 in gen-h
           }
 
           header = "";
