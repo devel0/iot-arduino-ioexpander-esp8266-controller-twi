@@ -15,3 +15,10 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 
 - imagemap of arduino nano ports
 - index.htm, app.js, image.png served by esp8266 ( encoded into flash by [gen-h](esp8266-controller-twi/gen-h) )
+- scalable TWI slave devices
+
+## api
+
+| **api** | **description** | **result example** |
+|---|---|---|
+| `/api/scan` | list of twi slave devices addresses (dec) | `` |

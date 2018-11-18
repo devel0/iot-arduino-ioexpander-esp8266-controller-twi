@@ -3,6 +3,7 @@
 #include "SerialOS.h"
 
 #include "image.h"
+#include "TWIUtil.h"
 
 WiFiServer server(WEB_PORT);
 
@@ -204,6 +205,23 @@ void manageWifi()
             //clientWriteBinary(client, image, image_len); // FLASH_VERSION=0 in gen-h
 
             clientWriteBinaryF(client, image, image_len); // FLASH_VERSION=1 in gen-h
+          }
+          else if (header.indexOf("GET /api/scan ") >= 0)
+          {
+            clientOk(client, CCTYPE_JSON);
+
+            client.print("[");
+            auto lst = TWIScan();
+            auto n = lst.GetNode(0);
+            int i=0;
+            while (n)
+            {
+              if (i>0) client.print(',');
+              client.print(n->data);
+              n = n->next;
+              ++i;              
+            }
+            client.println("]");
           }
 
           header = "";

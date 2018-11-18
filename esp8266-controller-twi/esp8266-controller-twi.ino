@@ -37,7 +37,7 @@ void setup()
 
   reconnectWifi();
 
-Serial.print("TWI Bus devices : ");
+  Serial.print("TWI Bus devices : ");
   auto lst = TWIScan();
   auto n = lst.GetNode(0);
   while (n)
