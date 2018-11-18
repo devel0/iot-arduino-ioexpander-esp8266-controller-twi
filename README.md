@@ -21,4 +21,4 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 
 | **api** | **description** | **result example** |
 |---|---|---|
-| `/api/scan` | list of twi slave devices addresses (dec) | `` |
+| `/api/scan` | list of twi slave devices addresses (dec) | `[8,19]` |

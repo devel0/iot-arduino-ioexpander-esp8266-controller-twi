@@ -213,13 +213,14 @@ void manageWifi()
             client.print("[");
             auto lst = TWIScan();
             auto n = lst.GetNode(0);
-            int i=0;
+            int i = 0;
             while (n)
             {
-              if (i>0) client.print(',');
+              if (i > 0)
+                client.print(',');
               client.print(n->data);
               n = n->next;
-              ++i;              
+              ++i;
             }
             client.println("]");
           }
