@@ -59,7 +59,7 @@ cat "$exdir/app.js" | sed 's/debug = true/debug = false/g' | removetrailingnewli
 echo '")' >> "$dst"
 
 # generate png byte array
-src="$exdir/arduino-nano-pinout-layout-horizontal-thick.png"
+src="$exdir/image.png"
 dst="$exdir/image.h"
 if [ "$FLASH_VERSION" == "1" ]; then
     flashopt="const PROGMEM"
