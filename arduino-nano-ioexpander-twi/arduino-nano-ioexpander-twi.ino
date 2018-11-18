@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <Wire.h>
 
+#define TWI_ADDRESS 19
+
 void setup()
 {
   Serial.begin(115200);
@@ -8,7 +10,7 @@ void setup()
 
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
-  Wire.begin(8); // join bus as slave
+  Wire.begin(TWI_ADDRESS); // join bus as slave
 }
 
 void loop()

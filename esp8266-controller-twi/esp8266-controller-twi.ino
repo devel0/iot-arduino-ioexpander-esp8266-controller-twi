@@ -16,6 +16,7 @@
 #include "EEUtil.h"
 #include "SerialOS.h"
 #include "Util.h"
+#include "TWIUtil.h"
 
 //=============================================================
 // SETUP
@@ -35,6 +36,16 @@ void setup()
   Wire.begin(); // join i2c bus as master
 
   reconnectWifi();
+
+Serial.print("TWI Bus devices : ");
+  auto lst = TWIScan();
+  auto n = lst.GetNode(0);
+  while (n)
+  {
+    Serial.printf("0x%02x ", n->data);
+    n = n->next;
+  }
+  Serial.println();
 }
 
 //=============================================================

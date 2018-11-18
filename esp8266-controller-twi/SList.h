@@ -5,6 +5,12 @@
 
 #include <Arduino.h>
 
+namespace SearchAThing
+{
+
+namespace Arduino
+{
+
 // Templated simple linked-list node element.
 // Store templated element `T' into a node object that allow to
 // follow using a `next' pointer to the next one in the list.
@@ -175,5 +181,9 @@ class SList
 		return res;
 	}
 };
+
+} // namespace Arduino
+
+} // namespace SearchAThing
 
 #endif
