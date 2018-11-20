@@ -1,25 +1,25 @@
-<img src="[arduino-nano-pinout-layout-horizontal-thick] (imported)" width="639" height="302" border="0" usemap="#map" />
+<img src="[arduino-nano-pinout-layout-vertical-thick] (imported)" width="430" height="741" border="0" usemap="#map" />
 
 <map name="map">
 <!-- #$-:Image map file created by GIMP Image Map plug-in -->
 <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
 <!-- #$-:Please do not edit lines starting with "#$" -->
 <!-- #$VERSION:2.3 -->
-<!-- #$AUTHOR:Lorenzo Delana  -->
-<area shape="rect" coords="168,232,200,301" alt="A0"  nohref="nohref" />
-<area shape="rect" coords="59,232,91,301" alt="D13"  nohref="nohref" />
-<area shape="rect" coords="240,232,272,301" alt="A2"  nohref="nohref" />
-<area shape="rect" coords="203,232,235,301" alt="A1"  nohref="nohref" />
-<area shape="rect" coords="276,232,308,301" alt="A3"  nohref="nohref" />
-<area shape="rect" coords="422,0,454,69" alt="D02"  nohref="nohref" />
-<area shape="rect" coords="385,0,417,69" alt="D03"  nohref="nohref" />
-<area shape="rect" coords="349,0,381,69" alt="D04"  nohref="nohref" />
-<area shape="rect" coords="313,0,345,69" alt="D05"  nohref="nohref" />
-<area shape="rect" coords="277,0,309,69" alt="D06"  nohref="nohref" />
-<area shape="rect" coords="240,0,272,69" alt="D07"  nohref="nohref" />
-<area shape="rect" coords="204,0,236,69" alt="D08"  nohref="nohref" />
-<area shape="rect" coords="168,0,200,69" alt="D09"  nohref="nohref" />
-<area shape="rect" coords="132,0,164,69" alt="D10"  nohref="nohref" />
-<area shape="rect" coords="95,0,127,69" alt="D11"  nohref="nohref" />
-<area shape="rect" coords="58,0,90,69" alt="D12"  nohref="nohref" />
+<!-- #$AUTHOR:Lorenzo Delana -->
+<area shape="rect" coords="0,74,107,104" alt="D13"  nohref="nohref" />
+<area shape="rect" coords="323,493,430,523" alt="D2"  nohref="nohref" />
+<area shape="rect" coords="323,451,430,481" alt="D3"  nohref="nohref" />
+<area shape="rect" coords="323,409,430,439" alt="D4"  nohref="nohref" />
+<area shape="rect" coords="323,366,430,396" alt="D5"  nohref="nohref" />
+<area shape="rect" coords="323,324,430,354" alt="D6"  nohref="nohref" />
+<area shape="rect" coords="323,282,430,312" alt="D7"  nohref="nohref" />
+<area shape="rect" coords="323,114,430,144" alt="D11"  nohref="nohref" />
+<area shape="rect" coords="323,72,430,102" alt="D12"  nohref="nohref" />
+<area shape="rect" coords="323,241,430,271" alt="D8"  nohref="nohref" />
+<area shape="rect" coords="0,324,107,354" alt="A3"  nohref="nohref" />
+<area shape="rect" coords="0,284,107,314" alt="A2"  nohref="nohref" />
+<area shape="rect" coords="0,240,107,270" alt="A1"  nohref="nohref" />
+<area shape="rect" coords="1,198,108,228" alt="A0"  nohref="nohref" />
+<area shape="rect" coords="323,199,430,229" alt="D9"  nohref="nohref" />
+<area shape="rect" coords="323,156,430,186" alt="D10"  nohref="nohref" />
 </map>

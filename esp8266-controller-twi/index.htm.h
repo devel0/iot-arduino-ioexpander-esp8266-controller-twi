@@ -11,8 +11,9 @@ crossorigin=\"anonymous\">\
 \
 <style>\
 .port:hover {\
-background-color: rgba(255,255,0, .2);\
+background-color: rgba(0, 0, 0, .1);\
 }\
+\
 .port-selected {\
 background-color: rgba(255, 183, 0, .2);\
 }\
@@ -24,84 +25,100 @@ background-color: rgba(255, 183, 0, .2);\
 <div class=\"container\">\
 <div class=\"row mt-3\">\
 <div class=\"col-auto\">\
-<h1>Arduino nano controller</h1>\
+<h1>Arduino nano ESP8266 TWI controlled demo</h1>\
 </div>\
 <div class=\"col\"><i class=\"fas fa-spin fa-spinner j-spin collapse\"></i></div>\
+</div>\
+\
+<div class=\"row mt-3 port-selector collapse\">\
+<div class=\"col-auto\">\
+<h2>port selector</h2>\
+</div>\
+</div>\
+\
+<div class=\"row mt-3 slave-selected collapse\">\
+<div class=\"col-auto\">\
+<div id=\"imgdiv\">\
+<img id='mapimg' src=\"image.png\" width=\"430\" height=\"741\" border=\"0\" usemap=\"#map\" />\
+\
+<map name=\"map\">\
+<area shape=\"rect\" coords=\"0,74,107,104\" alt=\"D13\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,493,430,523\" alt=\"D2\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,451,430,481\" alt=\"D3\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,409,430,439\" alt=\"D4\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,366,430,396\" alt=\"D5\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,324,430,354\" alt=\"D6\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,282,430,312\" alt=\"D7\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,114,430,144\" alt=\"D11\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,72,430,102\" alt=\"D12\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,241,430,271\" alt=\"D8\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"0,324,107,354\" alt=\"A3\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"0,284,107,314\" alt=\"A2\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"0,240,107,270\" alt=\"A1\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"1,198,108,228\" alt=\"A0\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,199,430,229\" alt=\"D9\" nohref=\"nohref\" />\
+<area shape=\"rect\" coords=\"323,156,430,186\" alt=\"D10\" nohref=\"nohref\" />\
+</map>\
+</div>\
+</div>\
 </div>\
 \
 <div class=\"row mt-3\">\
 <div class=\"col-auto\">\
 <h2>slave selector</h2>\
 \
-<div class=\"list-group\" id='buslst'>\
-\
-</div>\
+<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\" id=\"buslst\">\
 </div>\
 \
+</div>\
+\
+<div class=\"col-auto slave-selected collapse\">\
+<h2>ports</h2>\
+<div class=\"row\">\
 <div class=\"col-auto\">\
-<h2>set mode</h2>\
-<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\
-<label class=\"btn btn-light\">\
-<input type=\"radio\" name=\"options\" id=\"modeinput\" autocomplete=\"off\">\
-INPUT\
-</label>\
-<label class=\"btn btn-light\">\
-<input type=\"radio\" name=\"options\" id=\"modeoutput\" autocomplete=\"off\">\
-OUTPUT\
-</label>\
-<label class=\"btn btn-light\">\
-<input type=\"radio\" name=\"options\" id=\"modeinputpullup\" autocomplete=\"off\">\
-INPUT (pullup)\
-</label>\
+<button class=\"btn btn-link j-ports-refresh\">refresh</button>\
 </div>\
 </div>\
-</div>\
-\
-<div class=\"row mt-3\">\
+<div class=\"row mt-2\">\
 <div class=\"col-auto\">\
-<h2>port selector</h2>\
+<div class=\"table-container\">\
+<div class=\"table table-striped\">\
+<table class=\"table\">\
+<thread>\
+<tr>\
+<th scope=\"col\"><b>Port</b></th>\
+<th scope=\"col\"><b>Mode</b></th>\
+<th scope=\"col\"><b>Value</b></th>\
+</tr>\
+</thread>\
+<tbody id='ports-tbody' />\
+</table>\
+</div>\
+</div>\
+</div>\
 </div>\
 </div>\
 \
-<div class=\"row mt-3\">\
-<div class=\"col-auto\">\
-<div id=\"imgdiv\">\
-<!--                <img src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/arduino-nano-pinout-layout-horizontal-thick.png\"                    width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' /> -->\
-<img id='mapimg' src=\"image.png\" width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' />\
+<div class=\"col-auto slave-selected collapse\">\
+<h2>port actions</h2>\
+<div class=\"list-group port-actions collapse\" id='buslst'>\
+<button class='btn btn-link mt-2'>set as INPUT</button>\
+<button class='btn btn-link mt-2'>set as OUTPUT</button>\
+<button class='btn btn-link mt-2'>set as INPUT (pullup)</button>\
+<button class='btn btn-link mt-2'>write LOW</button>\
+<button class='btn btn-link mt-2'>write HIGH</button>\
+</div>\
+</div>\
 \
-<map name=\"map\">\
-<area shape=\"rect\" coords=\"168,232,200,301\" alt=\"A0\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"59,232,91,301\" alt=\"D13\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"240,232,272,301\" alt=\"A2\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"203,232,235,301\" alt=\"A1\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"276,232,308,301\" alt=\"A3\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"313,233,345,302\" alt=\"A4\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"350,233,382,302\" alt=\"A5\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"386,233,418,302\" alt=\"A6\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"422,233,454,302\" alt=\"A7\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"422,0,454,69\" alt=\"D02\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"385,0,417,69\" alt=\"D03\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"349,0,381,69\" alt=\"D04\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"313,0,345,69\" alt=\"D05\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"277,0,309,69\" alt=\"D06\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"240,0,272,69\" alt=\"D07\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"204,0,236,69\" alt=\"D08\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"168,0,200,69\" alt=\"D09\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"132,0,164,69\" alt=\"D10\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"95,0,127,69\" alt=\"D11\" nohref=\"nohref\" />\
-<area shape=\"rect\" coords=\"58,0,90,69\" alt=\"D12\" nohref=\"nohref\" />\
-</map>\
 </div>\
-</div>\
-</div>\
+\
+\
 \
 </div>\
 \
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js\" integrity=\"sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=\"\
 crossorigin=\"anonymous\"></script>\
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js\" integrity=\"sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=\"\
-crossorigin=\"anonymous\"></script>\
-<script src=\"https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js\" integrity=\"sha256-nUK4JHJVwdj7H1SYkkMcuE2unpjH5vYOe3mGEVu/69Q=\"\
 crossorigin=\"anonymous\"></script>\
 <!-- <script src=\"app.js\"></script> -->\
 <script src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/app.js\"></script>\
