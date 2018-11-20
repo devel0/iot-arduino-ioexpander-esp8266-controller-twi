@@ -3,12 +3,22 @@ F("<html>\
 \
 <head>\
 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\
-</head>\
 \
 <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css\"\
 integrity=\"sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=\" crossorigin=\"anonymous\" />\
 <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.5.0/css/all.css\" integrity=\"sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU\"\
 crossorigin=\"anonymous\">\
+\
+<style>\
+.port:hover {\
+background-color: rgba(255,255,0, .2);\
+}\
+.port-selected {\
+background-color: rgba(255, 183, 0, .2);\
+}\
+</style>\
+\
+</head>\
 \
 <body>\
 <div class=\"container\">\
@@ -21,15 +31,27 @@ crossorigin=\"anonymous\">\
 \
 <div class=\"row mt-3\">\
 <div class=\"col-auto\">\
-1. Choose an action:\
+<h2>slave selector</h2>\
+\
+<div class=\"list-group\" id='buslst'>\
+\
 </div>\
+</div>\
+\
 <div class=\"col-auto\">\
+<h2>set mode</h2>\
 <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\
-<label class=\"btn btn-secondary active\">\
-<input type=\"radio\" name=\"options\" id=\"option1\" autocomplete=\"off\" checked>ON\
+<label class=\"btn btn-light\">\
+<input type=\"radio\" name=\"options\" id=\"modeinput\" autocomplete=\"off\">\
+INPUT\
 </label>\
-<label class=\"btn btn-secondary\">\
-<input type=\"radio\" name=\"options\" id=\"option2\" autocomplete=\"off\">OFF\
+<label class=\"btn btn-light\">\
+<input type=\"radio\" name=\"options\" id=\"modeoutput\" autocomplete=\"off\">\
+OUTPUT\
+</label>\
+<label class=\"btn btn-light\">\
+<input type=\"radio\" name=\"options\" id=\"modeinputpullup\" autocomplete=\"off\">\
+INPUT (pullup)\
 </label>\
 </div>\
 </div>\
@@ -37,14 +59,15 @@ crossorigin=\"anonymous\">\
 \
 <div class=\"row mt-3\">\
 <div class=\"col-auto\">\
-2. Click on a port to set it\
+<h2>port selector</h2>\
 </div>\
 </div>\
 \
 <div class=\"row mt-3\">\
 <div class=\"col-auto\">\
+<div id=\"imgdiv\">\
 <!--                <img src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/arduino-nano-pinout-layout-horizontal-thick.png\"                    width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' /> -->\
-<img src=\"image.png\" width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' />\
+<img id='mapimg' src=\"image.png\" width=\"639\" height=\"302\" border=\"0\" usemap=\"#map\" class='map' />\
 \
 <map name=\"map\">\
 <area shape=\"rect\" coords=\"168,232,200,301\" alt=\"A0\" nohref=\"nohref\" />\
@@ -70,6 +93,7 @@ crossorigin=\"anonymous\">\
 </map>\
 </div>\
 </div>\
+</div>\
 \
 </div>\
 \
@@ -79,8 +103,8 @@ crossorigin=\"anonymous\"></script>\
 crossorigin=\"anonymous\"></script>\
 <script src=\"https://cdnjs.cloudflare.com/ajax/libs/maphilight/1.4.0/jquery.maphilight.min.js\" integrity=\"sha256-nUK4JHJVwdj7H1SYkkMcuE2unpjH5vYOe3mGEVu/69Q=\"\
 crossorigin=\"anonymous\"></script>\
-<script src=\"app.js\"></script>\
-<!--    <script src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/app.js\"></script> -->\
+<!-- <script src=\"app.js\"></script> -->\
+<script src=\"/opensource/devel0/iot-arduino-ioexpander-esp8266-controller-twi/esp8266-controller-twi/app.js\"></script>\
 </body>\
 \
 </html>")

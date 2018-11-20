@@ -5,6 +5,15 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "initializer_list": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "hardwareserial.h": "c",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "type_traits": "cpp",
+        "istream": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp"
     }
 }

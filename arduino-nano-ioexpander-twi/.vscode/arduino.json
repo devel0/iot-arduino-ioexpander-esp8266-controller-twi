@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328old",
-    "port": "/dev/ttyUSB1",
-    "sketch": "atmega8-as-io-expander.ino"
+    "port": "/dev/ttyUSB2",
+    "sketch": "arduino-nano-ioexpander-twi.ino"
 }

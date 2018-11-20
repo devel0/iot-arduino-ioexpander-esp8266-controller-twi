@@ -22,3 +22,4 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 | **api** | **description** | **result example** |
 |---|---|---|
 | `/api/scan` | list of twi slave devices addresses (dec) | `[8,19]` |
+| `/api/getportmode/addr` | retrieve port mode 0=input, 1=output, 2=input_pullup of slave at `addr` ports | `[{ "port": "D2", "mode": 0 },...,{ "port": "A3", "mode": 0 }]` |

@@ -4,6 +4,9 @@
 
 #include "image.h"
 #include "TWIUtil.h"
+#include "Config.h"
+
+#include "arduinoNanoUtil.h"
 
 WiFiServer server(WEB_PORT);
 
@@ -68,22 +71,27 @@ void clientOk(WiFiClient &client, int type)
   switch (type)
   {
   case CCTYPE_HTML:
+    Serial.println("[HTML]");
     client.println("Content-Type: text/html");
     break;
 
   case CCTYPE_JSON:
+    Serial.println("[JSON]");
     client.println("Content-Type: application/json");
     break;
 
   case CCTYPE_TEXT:
+    Serial.println("[TEXT]");
     client.println("Content-Type: text/plain");
     break;
 
   case CCTYPE_JS:
+    Serial.println("[JS]");
     client.println("Content-Type: text/javascript");
     break;
 
   case CCTYPE_PNG:
+    Serial.println("[PNG]");
     client.println("Content-Type: image/png");
     break;
   }
@@ -92,6 +100,7 @@ void clientOk(WiFiClient &client, int type)
   client.println("Access-Control-Allow-Origin: *");
 #endif
 
+  //client.println("Connection: close");
   client.println();
 }
 
@@ -174,11 +183,13 @@ void manageWifi()
       if (client.available())
       {
         char c = client.read();
-        header += c;
-
-        if (c == '\n')
+        if (c != '\n')
+          header += c;
+        else
         {
           Serial.printf("header [%s]\n", header.c_str());
+          while (client.available())
+            client.read(); // discard rest of header
 
           if (header.indexOf("GET / ") >= 0 || header.indexOf("GET /index.htm") >= 0)
           {
@@ -188,7 +199,7 @@ void manageWifi()
 #include "index.htm.h"
             );
           }
-          if (header.indexOf("GET /app.js ") >= 0)
+          else if (header.indexOf("GET /app.js ") >= 0)
           {
             clientOk(client, CCTYPE_JS);
 
@@ -206,8 +217,11 @@ void manageWifi()
 
             clientWriteBinaryF(client, image, image_len); // FLASH_VERSION=1 in gen-h
           }
+          //
+          // /api/scan
           else if (header.indexOf("GET /api/scan ") >= 0)
           {
+            Serial.println("/api/scan");
             clientOk(client, CCTYPE_JSON);
 
             client.print("[");
@@ -224,6 +238,178 @@ void manageWifi()
             }
             client.println("]");
           }
+          //
+          // /api/getportmodes/<addr>
+          else if (header.indexOf("GET /api/getportmodes/") >= 0)
+          {
+            clientOk(client, CCTYPE_JSON);
+
+            int slaveaddr;
+            // retrieve slave address from GET
+            {
+              String str;
+              for (int i = 22; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == ' ')
+                  break;
+                str += header.c_str()[i];
+              }
+              slaveaddr = atoi(str.c_str());
+            }
+            Serial.printf("addr[%d]\n", slaveaddr);
+
+            auto portModes = getPortModes(slaveaddr);
+            auto n = portModes.GetNode(0);
+
+            client.print("[");
+            while (n)
+            {
+              Serial.printf("{ \"port\": \"%s\", \"mode\": %d }", n->data.port.c_str(), n->data.mode);
+
+              client.printf("{ \"port\": \"%s\", \"mode\": %d }", n->data.port.c_str(), n->data.mode);
+              if (n->next != NULL)
+              {
+                client.print(",");
+                Serial.print(",");
+              }
+              n = n->next;
+            }
+
+            client.println("]");
+          }
+          //
+          // /api/setportmode/<addr>/<portstr>/<mode>
+          else if (header.indexOf("GET /api/setportmode/") >= 0)
+          {
+            clientOk(client, CCTYPE_JSON);
+
+            int slaveaddr;
+            String port;
+            int mode;
+            // retrieve slave address from GET
+            {
+              String str;
+              int i = 21;
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == '/')
+                {
+                  ++i;
+                  break;
+                }
+                str += header.c_str()[i];
+              }
+              slaveaddr = atoi(str.c_str());
+
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == '/')
+                {
+                  ++i;
+                  break;
+                }
+                str += header.c_str()[i];
+              }
+              Serial.printf("portstr[%s]\n", str.c_str());
+              port = str;
+
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == ' ')
+                  break;
+                str += header.c_str()[i];
+              }
+              mode = atoi(str.c_str());
+            }
+            Serial.printf("addr[%d] port[%d] mode[%d]\n", slaveaddr, port.c_str(), mode);
+
+            setPortMode(slaveaddr, port.c_str(), mode);
+          }
+          //
+          // /api/getportvalues/<addr>
+          else if (header.indexOf("GET /api/getportvalues/") >= 0)
+          {
+            clientOk(client, CCTYPE_JSON);
+
+            int slaveaddr;
+            // retrieve slave address from GET
+            {
+              String str;
+              for (int i = 23; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == ' ')
+                  break;
+                str += header.c_str()[i];
+              }
+              slaveaddr = atoi(str.c_str());
+            }
+            Serial.printf("addr[%d]\n", slaveaddr);
+
+            auto portModes = getPortValues(slaveaddr);
+            auto n = portModes.GetNode(0);
+
+            client.print("[");
+            while (n)
+            {
+              Serial.printf("{ \"port\": \"%s\", \"value\": %d }", n->data.port.c_str(), n->data.value);
+              client.printf("{ \"port\": \"%s\", \"value\": %d }", n->data.port.c_str(), n->data.value);
+              if (n->next != NULL)
+              {
+                client.print(",");
+                Serial.print(",");
+              }
+              n = n->next;
+            }
+
+            client.println("]");
+          }
+          //
+          // /api/setportvalue/<addr>/<portstr>/<value>
+          else if (header.indexOf("GET /api/setportvalue/") >= 0)
+          {
+            clientOk(client, CCTYPE_JSON);
+
+            int slaveaddr;
+            String port;
+            int value;
+            // retrieve slave address from GET
+            {
+              String str;
+              int i = 22;
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == '/')
+                {
+                  ++i;
+                  break;
+                }
+                str += header.c_str()[i];
+              }
+              slaveaddr = atoi(str.c_str());
+
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == '/')
+                {
+                  ++i;
+                  break;
+                }
+                str += header.c_str()[i];
+              }
+              port = str;
+
+              for (str = ""; i < header.length(); ++i)
+              {
+                if (header.c_str()[i] == ' ')
+                  break;
+                str += header.c_str()[i];
+              }
+              value = atoi(str.c_str());
+            }
+            Serial.printf("addr[%d] port[%s] value[%d]\n", slaveaddr, port.c_str(), value);
+
+            setPortValue(slaveaddr, port.c_str(), value);
+          }
 
           header = "";
           break;
@@ -231,6 +417,7 @@ void manageWifi()
       }
     }
 
+    Serial.println("---> client stop");
     client.stop();
   }
 }

@@ -10,8 +10,6 @@
 
 #include <EEPROM.h>
 
-#include <Wire.h>
-
 #include "WiFiUtil.h"
 #include "EEUtil.h"
 #include "SerialOS.h"
@@ -33,7 +31,7 @@ void setup()
 
   EEInit();
 
-  Wire.begin(); // join i2c bus as master
+  WireInit();
 
   reconnectWifi();
 
@@ -54,7 +52,6 @@ void setup()
 
 void loop()
 {
-
   manageWifi();
 
   if (Serial.available())
