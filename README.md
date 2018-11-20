@@ -12,7 +12,7 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 
 ## browser page
 
-<img src="doc/home.gif" width=600/>
+![img](doc/home.png)
 
 ## requirements
 
