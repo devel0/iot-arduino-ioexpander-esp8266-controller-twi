@@ -4,6 +4,7 @@
 - [requirements](#requirements)
 - [features](#features)
 - [setup](#setup)
+- [advertisement](#advertisement)
 - [api ( esp8266 controller )](#api--esp8266-controller-)
 - [api ( arduino nano slave )](#api--arduino-nano-slave-)
   
@@ -23,6 +24,10 @@ arduino nano as ioexpander controlled by esp8266 through TWI
 - [schematics](https://easyeda.com/editor#id=|676ad221579b4190a2b0e6b3f3755e87)
 
 ![img](doc/schematics.png)
+
+## advertisement
+
+Take care not to set as output ports connected to ground ( [reference](https://www.rugged-circuits.com/10-ways-to-destroy-an-arduino/) )
 
 ## features
 
