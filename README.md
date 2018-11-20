@@ -1,5 +1,7 @@
 # iot-arduino-ioexpander-esp8266-controller-twi
 
+arduino nano as ioexpander controlled by esp8266 through TWI
+
 - [browser page](#browser-page)
 - [requirements](#requirements)
 - [features](#features)
@@ -7,8 +9,6 @@
 - [advertisement](#advertisement)
 - [api ( esp8266 controller )](#api--esp8266-controller-)
 - [api ( arduino nano slave )](#api--arduino-nano-slave-)
-  
-arduino nano as ioexpander controlled by esp8266 through TWI
 
 ## browser page
 
@@ -34,6 +34,7 @@ Take care not to set as output ports connected to ground ( [reference](https://w
 - imagemap of arduino nano ports
 - index.htm, app.js, image.png served by esp8266 ( encoded into flash by [gen-h](esp8266-controller-twi/gen-h) )
 - scalable TWI slave devices
+- control arduino nano port mode and value ( read, write ) from esp8266 through TWI
 
 ## HTTP api ( esp8266 controller )
 
