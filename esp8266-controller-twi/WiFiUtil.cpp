@@ -264,13 +264,12 @@ void manageWifi()
             client.print("[");
             while (n)
             {
-              Serial.printf("{ \"port\": \"%s\", \"mode\": %d }", n->data.port.c_str(), n->data.mode);
-
+              //Serial.printf("{ \"port\": \"%s\", \"mode\": %d }", n->data.port.c_str(), n->data.mode);
               client.printf("{ \"port\": \"%s\", \"mode\": %d }", n->data.port.c_str(), n->data.mode);
               if (n->next != NULL)
               {
                 client.print(",");
-                Serial.print(",");
+                //Serial.print(",");
               }
               n = n->next;
             }
@@ -321,7 +320,7 @@ void manageWifi()
               }
               mode = atoi(str.c_str());
             }
-            Serial.printf("addr[%d] port[%d] mode[%d]\n", slaveaddr, port.c_str(), mode);
+            Serial.printf("addr[%d] port[%s] mode[%d]\n", slaveaddr, port.c_str(), mode);
 
             setPortMode(slaveaddr, port.c_str(), mode);
           }
@@ -351,12 +350,12 @@ void manageWifi()
             client.print("[");
             while (n)
             {
-              Serial.printf("{ \"port\": \"%s\", \"value\": %d }", n->data.port.c_str(), n->data.value);
+              //Serial.printf("{ \"port\": \"%s\", \"value\": %d }", n->data.port.c_str(), n->data.value);
               client.printf("{ \"port\": \"%s\", \"value\": %d }", n->data.port.c_str(), n->data.value);
               if (n->next != NULL)
               {
                 client.print(",");
-                Serial.print(",");
+                //Serial.print(",");
               }
               n = n->next;
             }

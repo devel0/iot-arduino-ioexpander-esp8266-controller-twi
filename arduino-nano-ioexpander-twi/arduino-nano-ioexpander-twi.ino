@@ -51,8 +51,6 @@ int qportmode = 0;
 //------------------------------------------------------------
 void requestEvent()
 {
-  unsigned long mfrom = micros();
-
   switch (cmdRegister)
   {
 
@@ -73,11 +71,7 @@ void requestEvent()
   default:
     Serial.println("Unknown current command");
     break;
-  }
-  long timediff = TimeDiff(mfrom, micros());
-  Serial.print("Took ");
-  Serial.print(timediff);
-  Serial.println(" us");
+  }  
 }
 
 //------------------------------------------------------------
@@ -127,7 +121,7 @@ void receiveEvent(int howMany)
       Serial.print(qport);
       Serial.print(" ");
       Serial.println(qportmode);
-      //pinMode(qport, qportmode);
+      pinMode(qport, qportmode);
       break;
     }
   }

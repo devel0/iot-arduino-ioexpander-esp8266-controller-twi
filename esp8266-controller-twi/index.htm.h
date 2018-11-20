@@ -30,14 +30,18 @@ background-color: rgba(255, 183, 0, .2);\
 <div class=\"col\"><i class=\"fas fa-spin fa-spinner j-spin collapse\"></i></div>\
 </div>\
 \
-<div class=\"row mt-3 port-selector collapse\">\
+<div class=\"row\">\
 <div class=\"col-auto\">\
-<h2>port selector</h2>\
-</div>\
-</div>\
+<div class=\"row\">\
+<div class=\"col-auto\">\
+<h2>slave selector</h2>\
 \
+<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\" id=\"buslst\">\
+</div>\
+</div>\
+</div>\
 <div class=\"row mt-3 slave-selected collapse\">\
-<div class=\"col-auto\">\
+<div class=\"col-auto\" style=\"padding:0\">\
 <div id=\"imgdiv\">\
 <img id='mapimg' src=\"image.png\" width=\"430\" height=\"741\" border=\"0\" usemap=\"#map\" />\
 \
@@ -62,21 +66,32 @@ background-color: rgba(255, 183, 0, .2);\
 </div>\
 </div>\
 </div>\
+</div>\
+\
+<div class=\"col-auto\">\
+\
+<div class=\"row mt-3 port-selector collapse\">\
+<div class=\"col-auto\">\
+<h2>port selector</h2>\
+</div>\
+</div>\
 \
 <div class=\"row mt-3\">\
-<div class=\"col-auto\">\
-<h2>slave selector</h2>\
-\
-<div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\" id=\"buslst\">\
+<div class=\"col-auto slave-selected collapse\">\
+<h2>port actions</h2>\
+<div class=\"list-group port-actions collapse\" id='buslst'>\
+<button class='btn btn-link mt-2 j-set-as-input'>set as INPUT</button>\
+<button class='btn btn-link mt-2 j-set-as-output'>set as OUTPUT</button>\
+<button class='btn btn-link mt-2 j-set-as-input-pullup'>set as INPUT (pullup)</button>\
+<button class='btn btn-link mt-2 j-write-low'>write LOW</button>\
+<button class='btn btn-link mt-2 j-write-high'>write HIGH</button>\
 </div>\
-\
 </div>\
-\
 <div class=\"col-auto slave-selected collapse\">\
 <h2>ports</h2>\
 <div class=\"row\">\
 <div class=\"col-auto\">\
-<button class=\"btn btn-link j-ports-refresh\">refresh</button>\
+<button class=\"btn btn-link j-ports-refresh\">read</button>\
 </div>\
 </div>\
 <div class=\"row mt-2\">\
@@ -98,18 +113,8 @@ background-color: rgba(255, 183, 0, .2);\
 </div>\
 </div>\
 </div>\
-\
-<div class=\"col-auto slave-selected collapse\">\
-<h2>port actions</h2>\
-<div class=\"list-group port-actions collapse\" id='buslst'>\
-<button class='btn btn-link mt-2'>set as INPUT</button>\
-<button class='btn btn-link mt-2'>set as OUTPUT</button>\
-<button class='btn btn-link mt-2'>set as INPUT (pullup)</button>\
-<button class='btn btn-link mt-2'>write LOW</button>\
-<button class='btn btn-link mt-2'>write HIGH</button>\
 </div>\
 </div>\
-\
 </div>\
 \
 \

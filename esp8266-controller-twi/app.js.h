@@ -44,7 +44,7 @@ canvas.height = h;\
 canvas.style.width = w;\
 canvas.style.height = h;\
 canvas.style.position = 'absolute';\
-canvas.style.left = coords[0] + w / 2;\
+canvas.style.left = coords[0];\
 canvas.style.top = coords[1];\
 canvas.classList.add('port');\
 imgdiv.appendChild(canvas);\
@@ -61,7 +61,7 @@ let ports = [\
 $.each(ports, function (idx, val) {\
 let tr = document.createElement(\"tr\"); {\
 let td = document.createElement(\"td\");\
-td.innerHTML = '<b>' + val +'</b>';\
+td.innerHTML = '<b>' + val + '</b>';\
 tr.appendChild(td);\
 } {\
 let td = document.createElement(\"td\");\
@@ -81,36 +81,11 @@ tb.appendChild(tr);\
 }\
 }\
 \
-try {\
-$('.j-spin').removeClass(\"collapse\");\
-res = await $.ajax({\
-url: baseurl + \"/api/scan\",\
-type: 'GET'\
-});\
-$('.j-spin').addClass(\"collapse\");\
-$.each(res, function (idx, val) {\
-let l = document.createElement('label');\
-l.classList = \"btn btn-link slave-sel\";\
-l.id = \"bus-\" + val;\
-let r = document.createElement('input');\
-r.type = \"radio\";\
-r.name = \"options\";\
-r.autocomplete = \"off\";\
-l.innerHTML = '0x' + val.toString(16);\
-l.appendChild(r);\
-$('#buslst')[0].appendChild(l);\
+var busnr = 0;\
 \
-$(l).click(function (e) {\
-$('.slave-selected').removeClass('collapse');\
-});\
-});\
-} catch (e) {\
-console.log(e);\
-}\
-\
-$('.j-ports-refresh').click(async function (e) {\
+async function portRefresh() {\
 try {\
-let busnr = $('.slave-sel.active')[0].id.substring(4);\
+if (busnr == 0) return;\
 \
 $('.j-spin').removeClass(\"collapse\");\
 \
@@ -150,8 +125,102 @@ if (jpm[0] != null) jpm[0].innerHTML = v;\
 } catch (e) {\
 console.log(e);\
 }\
+}\
+\
+try {\
+$('.j-spin').removeClass(\"collapse\");\
+res = await $.ajax({\
+url: baseurl + \"/api/scan\",\
+type: 'GET'\
+});\
+$('.j-spin').addClass(\"collapse\");\
+$.each(res, function (idx, val) {\
+let l = document.createElement('label');\
+l.classList = \"btn btn-link slave-sel\";\
+l.id = \"bus-\" + val;\
+let r = document.createElement('input');\
+r.type = \"radio\";\
+r.name = \"options\";\
+r.autocomplete = \"off\";\
+l.innerHTML = '0x' + val.toString(16);\
+l.appendChild(r);\
+$('#buslst')[0].appendChild(l);\
+\
+$(l).click(function (e) {\
+$('.slave-selected').removeClass('collapse');\
+busnr = $(this)[0].id.substring(4);\
+portRefresh();\
+});\
+});\
+} catch (e) {\
+console.log(e);\
+}\
+\
+$('.j-ports-refresh').click(function (e) {\
+portRefresh();\
 });\
 \
+$('.j-set-as-input').click(async function (e) {\
+\
+});\
+\
+function setSelectedPortsMode(mode) {\
+$('.port-selected').each(async function (idx, val) {\
+let portstr = val.id.substring(5);\
+\
+try {\
+$('.j-spin').removeClass(\"collapse\");\
+\
+res = await $.ajax({\
+url: baseurl + \"/api/setportmode/\" + busnr + \"/\" + portstr + \"/\" + mode,\
+type: 'GET'\
+});\
+$('.j-spin').addClass(\"collapse\");\
+} catch (e) {\
+console.log(e);\
+}\
+});\
+portRefresh();\
+}\
+\
+$('.j-set-as-input').click(function (e) {\
+setSelectedPortsMode(0);\
+});\
+\
+$('.j-set-as-output').click(function (e) {\
+setSelectedPortsMode(1);\
+});\
+\
+$('.j-set-as-input-pullup').click(function (e) {\
+setSelectedPortsMode(2);\
+});\
+\
+function writeSelectedPorts(x) {\
+$('.port-selected').each(async function (idx, val) {\
+let portstr = val.id.substring(5);\
+\
+try {\
+$('.j-spin').removeClass(\"collapse\");\
+\
+res = await $.ajax({\
+url: baseurl + \"/api/setportvalue/\" + busnr + \"/\" + portstr + \"/\" + x,\
+type: 'GET'\
+});\
+$('.j-spin').addClass(\"collapse\");\
+} catch (e) {\
+console.log(e);\
+}\
+});\
+portRefresh();\
+}\
+\
+$('.j-write-low').click(function (e) {\
+writeSelectedPorts(0);\
+});\
+\
+$('.j-write-high').click(function (e) {\
+writeSelectedPorts(1);\
+});\
 }\
 \
 myfn();\
